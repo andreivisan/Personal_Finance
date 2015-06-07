@@ -16,6 +16,7 @@
 
     <link href="stylesheets/animate.css" rel="stylesheet">
     <link href="stylesheets/style.css" rel="stylesheet">
+    <link href="stylesheets/custom.css" rel="stylesheet">
 
 </head>
 
@@ -54,6 +55,44 @@
                     <li><a href="graph_flot.html">Credit Card 1</a></li>
                     <li><a href="graph_flot.html">Credit Card 2</a></li>
                     <li><a href="graph_flot.html">Savings Account</a></li>
+                    <li><a href="#modal-form" data-toggle="modal">Add account</a></li>
+                    <div id="modal-form" class="modal fade" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="add-account-modal"><h3 class="m-t-none m-b">ADD ACCOUNT</h3>
+                                            <form role="form">
+                                                <div class="form-group"><label>FINANCIAL INSTITUTION</label> <input type="text" placeholder="Your bank E.g. ING" class="form-control"></div>
+                                                <div class="form-group"><label>ACCOUNT NAME</label> <input type="text" placeholder="Unique account name" class="form-control"></div>
+                                                <div class="form-group"><label>CURRENCY</label>
+                                                    <select class="form-control m-b" name="currency">
+                                                        <option>EUR</option>
+                                                        <option>USD</option>
+                                                        <option>RON</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group"><label>ACCOUNT TYPE</label>
+                                                    <select class="form-control m-b" name="account_type">
+                                                        <option>Checking</option>
+                                                        <option>Savings</option>
+                                                        <option>Credit Card</option>
+                                                        <option>Investment</option>
+                                                        <option>Real Estate loan</option>
+                                                        <option>Other loans</option>
+                                                        <option>Cash</option>
+                                                    </select>
+                                                </div>
+                                                <div>
+                                                    <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong>ADD ACCOUNT</strong></button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </ul>
             </li>
             <li>

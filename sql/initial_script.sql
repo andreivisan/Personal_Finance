@@ -1,4 +1,3 @@
-//mySQL Heroku URL: mysql://b4805cdc795145:60aa17fe@us-cdbr-iron-east-02.cleardb.net/heroku_e56800c88b7a6b4?reconnect=true
 # ************************************************************
 # Sequel Pro SQL dump
 # Version 4096

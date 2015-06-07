@@ -45,12 +45,19 @@
                 </div>
             </li>
             <li class="active">
+                <a href="/main-dashboard"><i class="fa fa-th-large"></i> <span class="nav-label">DASHBOARD</span> <span class="fa"></span></a>
+            </li>
+            <li>
                 <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">TRANSACTIONS</span> <span class="fa"></span></a>
             </li>
             <li>
                 <a href="layouts.html"><i class="fa fa-diamond"></i> <span class="nav-label">ACCOUNTS</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li><a href="#">Debit Card 1</a></li>
+                    <% if(accounts) { %>
+                        <% accounts.forEach(function(account) { %>
+                            <li><a href="#"><%= account.name %></a> : <%= account.amount %></li>
+                        <% }) %>
+                    <% } %>
                     <li><a href="#modal-form" data-toggle="modal">Add account</a></li>
                     <div id="modal-form" class="modal fade" aria-hidden="true">
                         <div class="modal-dialog">
@@ -58,25 +65,26 @@
                                 <div class="modal-body">
                                     <div class="row">
                                         <div class="add-account-modal"><h3 class="m-t-none m-b">ADD ACCOUNT</h3>
-                                            <form role="form">
-                                                <div class="form-group"><label>FINANCIAL INSTITUTION</label> <input type="text" placeholder="Your bank E.g. ING" class="form-control"></div>
-                                                <div class="form-group"><label>ACCOUNT NAME</label> <input type="text" placeholder="Unique account name" class="form-control"></div>
+                                            <form action="/add-account" id="addAccountForm" method="post" role="form">
+                                                <div class="form-group"><label>FINANCIAL INSTITUTION</label> <input name="financial_institution" type="text" placeholder="Your bank E.g. ING" class="form-control"></div>
+                                                <div class="form-group"><label>ACCOUNT NAME</label> <input name="name" type="text" placeholder="Unique account name" class="form-control"></div>
+                                                <div class="form-group"><label>AMOUNT</label> <input name="amount" type="number" placeholder="Account balance" class="form-control"></div>
                                                 <div class="form-group"><label>CURRENCY</label>
-                                                    <select class="form-control m-b" name="currency">
-                                                        <option>EUR</option>
-                                                        <option>USD</option>
-                                                        <option>RON</option>
+                                                    <select name="currency" class="form-control m-b" name="currency">
+                                                        <option value="EUR">EUR</option>
+                                                        <option value="USD">USD</option>
+                                                        <option value="RON">RON</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group"><label>ACCOUNT TYPE</label>
-                                                    <select class="form-control m-b" name="account_type">
-                                                        <option>Checking</option>
-                                                        <option>Savings</option>
-                                                        <option>Credit Card</option>
-                                                        <option>Investment</option>
-                                                        <option>Real Estate loan</option>
-                                                        <option>Other loans</option>
-                                                        <option>Cash</option>
+                                                    <select name="type" class="form-control m-b" name="account_type">
+                                                        <option value="Checking">Checking</option>
+                                                        <option value="Savings">Savings</option>
+                                                        <option value="Credit card">Credit Card</option>
+                                                        <option value="Investment">Investment</option>
+                                                        <option value="Real Estate loan">Real Estate loan</option>
+                                                        <option value="Other loans">Other loans</option>
+                                                        <option value="Cash">Cash</option>
                                                     </select>
                                                 </div>
                                                 <div>

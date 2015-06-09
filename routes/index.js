@@ -38,4 +38,15 @@ router.post('/add-account', function(req, res) {
     });
 });
 
+router.get('/account-details', function(req, res) {
+    account.getAllAccounts(function(err, results) {
+      if(err) {
+        console.log("ROUTER: ERROR " + JSON.stringify(err));
+        res.render('account_details', {accounts: null});
+      } else {
+        res.render('account_details', {accounts: results});
+      }
+    });
+});
+
 module.exports = router;

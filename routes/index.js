@@ -5,7 +5,7 @@ var account = require("../account_module/account")
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index', { title: 'Express' });
+    res.render('index', { title: 'Express' });
 });
 
 router.get('/main-dashboard', function(req, res) {
@@ -40,12 +40,23 @@ router.post('/add-account', function(req, res) {
 
 router.get('/account-details', function(req, res) {
     account.getAllAccounts(function(err, results) {
-      if(err) {
-        console.log("ROUTER: ERROR " + JSON.stringify(err));
-        res.render('account_details', {accounts: null});
-      } else {
-        res.render('account_details', {accounts: results});
-      }
+        if(err) {
+            console.log("ROUTER: ERROR " + JSON.stringify(err));
+            res.render('account_details', {accounts: null});
+        } else {
+            account.getAccountById(req.param('accountId'), function(err, result) {
+                if(err) {
+                    console.log("ROUTER: ERROR " + JSON.stringify(err));
+                    res.render('account_details', {accounts: results, account: null});
+                }
+                if(result) {
+                    res.render('account_details', {accounts: results, account: result[0]});
+                } else {
+                    res.render('account_details', {accounts: results, account: null});
+                }
+
+            });
+        }
     });
 });
 

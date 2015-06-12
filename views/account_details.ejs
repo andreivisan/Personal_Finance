@@ -235,13 +235,40 @@
 
     </nav>
   </div>
-  <div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-9">
+
+  <div class="row wrapper wrapper-content">
       <% if(account) { %>
-        <%= account.name %> : <%= account.amount%> <%= account.currency %>
+      <%= account.name %> : <%= account.amount%> <%= account.currency %>
+
+      <div class="col-md-2">
+        <div class="ibox float-e-margins">
+          <div class="ibox-title">
+            <span class="label label-success pull-right">Monthly</span>
+            <h5>Views</h5>
+          </div>
+          <div class="ibox-content">
+            <h1 class="no-margins">386,200</h1>
+            <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div>
+            <small>Total views</small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="ibox float-e-margins">
+          <div class="ibox-title">
+            <span class="label label-info pull-right">Annual</span>
+            <h5>Orders</h5>
+          </div>
+          <div class="ibox-content">
+            <h1 class="no-margins">80,800</h1>
+            <div class="stat-percent font-bold text-info">20% <i class="fa fa-level-up"></i></div>
+            <small>New orders</small>
+          </div>
+        </div>
+      </div>
       <% } %>
-    </div>
   </div>
+
   <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
       <div class="col-lg-12">

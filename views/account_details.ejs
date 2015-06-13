@@ -14,6 +14,8 @@
     <!-- Morris -->
     <link href="stylesheets/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
 
+    <link href="stylesheets/plugins/datapicker/datepicker3.css" rel="stylesheet">
+
     <link href="stylesheets/animate.css" rel="stylesheet">
     <link href="stylesheets/style.css" rel="stylesheet">
     <link href="stylesheets/custom.css" rel="stylesheet">
@@ -140,8 +142,15 @@
     </nav>
   </div>
 
-  <div class="row wrapper wrapper-content">
+  <div class="wrapper-content">
       <% if(account) { %>
+
+          <div class="row wrapper border-bottom white-bg page-heading">
+              <div class="col-lg-9">
+                  <h2><%= account.name %></h2>
+              </div>
+          </div>
+
           <div class="col-md-2 account-details-ibox-width">
             <div class="ibox float-e-margins">
               <div class="ibox-title">
@@ -182,93 +191,125 @@
 
   <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
-      <div class="col-lg-12">
-        <div class="ibox float-e-margins">
-          <div class="ibox-content">
-            <h2>
-              2,160 results found for: <span class="text-navy">“Admin Theme”</span>
-            </h2>
-            <small>Request time  (0.23 seconds)</small>
 
-            <div class="search-form">
-              <form action="index.html" method="get">
-                <div class="input-group">
-                  <input type="text" placeholder="Admin Theme" name="search" class="form-control input-lg">
-                  <div class="input-group-btn">
-                    <button class="btn btn-lg btn-primary" type="submit">
-                      Search
-                    </button>
-                  </div>
-                </div>
-
-              </form>
-            </div>
-            <div class="hr-line-dashed"></div>
-            <div class="search-result">
-              <h3><a href="#">INSPINIA IN+ Admin Theme</a></h3>
-              <a href="#" class="search-link">www.inspinia.com/inspinia</a>
-              <p>
-                Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites
-                still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-              </p>
-            </div>
-            <div class="hr-line-dashed"></div>
-            <div class="search-result">
-              <h3><a href="#">WrapBootstrap - Bootstrap Themes & Templates</a></h3>
-              <a href="#" class="search-link">https://wrapbootstrap.com/‎</a>
-              <p>
-                WrapBootstrap is a marketplace for premium Bootstrap themes and templates. Impress your clients and visitors while using a single, rock-solid foundation.
-              </p>
-            </div>
-            <div class="hr-line-dashed"></div>
-            <div class="search-result">
-              <h3><a href="#">WrapBootstrap | Facebook</a></h3>
-              <a href="#" class="search-link">https://www.facebook.com/wrapbootstrap‎</a>
-              <p>
-                WrapBootstrap. 13672 likes · 508 talking about this. Marketplace for premium Bootstrap themes and templates. https://wrapbootstrap.com/
-              </p>
-            </div>
-            <div class="hr-line-dashed"></div>
-            <div class="search-result">
-              <h3><a href="#">Wrapbootstrap - Quora</a></h3>
-              <a href="#" class="search-link">www.quora.com/Wrapbootstrap‎‎</a>
-              <p>
-                If you are familiar with using any other HTML/CSS themes or WordPress themes then you shouldn't have any problems. If you have some experience using the ...
-              </p>
-            </div>
-            <div class="hr-line-dashed"></div>
-            <div class="search-result">
-              <h3><a href="#">Newspaper Template - Wrapbootstrap Free download ...</a></h3>
-              <a href="#" class="search-link">https://wrapbootstrap.com/‎‎</a>
-              <p>
-                What's black, white and red all over? The answer is Newspaper. A stylish magazine/news style theme inspired by black and white newsprint. The theme is.
-              </p>
-            </div>
-            <div class="hr-line-dashed"></div>
-            <div class="search-result">
-              <h3><a href="#">Admin Themes Wrapbootstrap</a></h3>
-              <a href="#" class="search-link">https://wrapbootstrap.com/themes/admin‎‎</a>
-              <p>
-                It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-              </p>
-            </div>
-            <div class="hr-line-dashed"></div>
-            <div class="text-center">
-              <div class="btn-group">
-                <button class="btn btn-white" type="button"><i class="fa fa-chevron-left"></i></button>
-                <button class="btn btn-white">1</button>
-                <button class="btn btn-white  active">2</button>
-                <button class="btn btn-white">3</button>
-                <button class="btn btn-white">4</button>
-                <button class="btn btn-white">5</button>
-                <button class="btn btn-white">6</button>
-                <button class="btn btn-white">7</button>
-                <button class="btn btn-white" type="button"><i class="fa fa-chevron-right"></i> </button>
-              </div>
-            </div>
-          </div>
+    <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+    <div class="ibox-title">
+        <h5>TRANSACTIONS </h5>
+        <div class="ibox-tools">
+            <a class="collapse-link">
+                <i class="fa fa-chevron-up"></i>
+            </a>
+            <a class="close-link">
+                <i class="fa fa-times"></i>
+            </a>
         </div>
-      </div>
+    </div>
+    <div class="ibox-content">
+        <div class="row">
+            <div class="col-sm-9 m-b-xs">
+                <div data-toggle="buttons" class="btn-group">
+                    <div class="text-center">
+                        <a href="#transaction-modal" class="btn btn-primary" data-toggle="modal">ADD TRANSACTION</a>
+                    </div>
+
+                    <div id="transaction-modal" class="modal fade" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="add-account-modal"><h3 class="m-t-none m-b">ADD TRANSACTION</h3>
+                                            <form action="/add-account" id="addAccountForm" method="post" role="form">
+                                                <div class="form-group"><label>DESCRIPTION</label> <input name="description" type="text" class="form-control"></div>
+                                                <div class="form-group"><label>AMOUNT</label> <input name="amount" type="number" class="form-control"></div>
+                                                <div class="form-group" id="data_1">
+                                                    <label class="font-noraml">DATE</label>
+                                                    <div class="input-group date">
+                                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" value="03/04/2014">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group"><label>TYPE</label>
+                                                    <select name="currency" class="form-control m-b" name="currency">
+                                                        <option value="EUR">EUR</option>
+                                                        <option value="USD">USD</option>
+                                                        <option value="RON">RON</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group"><label>ACCOUNT</label>
+                                                    <select name="type" class="form-control m-b" name="account_type">
+                                                        <option value="Checking">Checking</option>
+                                                        <option value="Savings">Savings</option>
+                                                        <option value="Credit card">Credit Card</option>
+                                                        <option value="Investment">Investment</option>
+                                                        <option value="Real Estate loan">Real Estate loan</option>
+                                                        <option value="Other loans">Other loans</option>
+                                                        <option value="Cash">Cash</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group"><label>BUDGET</label>
+                                                    <select name="type" class="form-control m-b" name="budget">
+                                                        <option value="Checking">Checking</option>
+                                                        <option value="Savings">Savings</option>
+                                                        <option value="Credit card">Credit Card</option>
+                                                        <option value="Investment">Investment</option>
+                                                        <option value="Real Estate loan">Real Estate loan</option>
+                                                        <option value="Other loans">Other loans</option>
+                                                        <option value="Cash">Cash</option>
+                                                    </select>
+                                                </div>
+                                                <div>
+                                                    <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong>ADD TRANSACTION</strong></button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <input type="text" placeholder="Search" class="input-sm form-control">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-sm btn-primary"> Go!</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>DATE </th>
+                        <th>AMOUNT </th>
+                        <th>DESCRIPTION </th>
+                        <th>TYPE </th>
+                        <th>ACCOUNT </th>
+                        <th>BUDGET</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>Project <small>This is example of project</small></td>
+                        <td>Patrick Smith</td>
+                        <td>0800 051213</td>
+                        <td>Inceptos Hymenaeos Ltd</td>
+                        <td><span class="pie">0.52/1.561</span></td>
+                        <td>20%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    </div>
+    </div>
+
     </div>
   </div>
   <div class="footer">
@@ -323,9 +364,19 @@
 <!-- ChartJS-->
 <script src="javascripts/plugins/chartJs/Chart.min.js"></script>
 
-<script>
-    $(document).ready(function() {
+<!-- Data picker -->
+<script src="javascripts/plugins/datapicker/bootstrap-datepicker.js"></script>
 
+<script>
+    $("#data_1 .date").datepicker({
+        todayBtn: "linked",
+        keyboardNavigation: false,
+        forceParse: false,
+        calendarWeeks: true,
+        autoclose: true
+    });
+
+    $(document).ready(function() {
 
         var d1 = [[1262304000000, 6], [1264982400000, 3057], [1267401600000, 20434], [1270080000000, 31982], [1272672000000, 26602], [1275350400000, 27826], [1277942400000, 24302], [1280620800000, 24237], [1283299200000, 21004], [1285891200000, 12144], [1288569600000, 10577], [1291161600000, 10295]];
         var d2 = [[1262304000000, 5], [1264982400000, 200], [1267401600000, 1605], [1270080000000, 6129], [1272672000000, 11643], [1275350400000, 19055], [1277942400000, 30062], [1280620800000, 39197], [1283299200000, 37000], [1285891200000, 27000], [1288569600000, 21000], [1291161600000, 17000]];

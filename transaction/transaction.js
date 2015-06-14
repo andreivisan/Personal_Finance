@@ -15,7 +15,7 @@ module.exports.createTransaction = function(request, callback) {
         description: request.body.description,
         amount: parseInt(request.body.amount),
         budget_id: parseInt(request.body.budget),
-        date: Date.parse(request.body.date),
+        date: new Date(request.body.date).toISOString().slice(0, 19).replace('T', ' '),
         account_id: parseInt(request.body.account_type),
         transaction_type_id: parseInt(request.body.transaction_type)
     };

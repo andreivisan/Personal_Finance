@@ -40,3 +40,7 @@ module.exports.createTransaction = function(request, callback) {
 //        });
     });
 }
+
+module.exports.getTransactionsByAccountId = function(accountId, callback) {
+
+}

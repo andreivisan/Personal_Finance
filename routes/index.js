@@ -95,7 +95,11 @@ router.post('/insert-transaction', function(req, res) {
     transaction.createTransaction(req, function(err, response) {
        if(!err) {
            account.getAccountById(req.body.account_type, function(err, accountRes) {
-               var newAmount = parseInt(accountRes[0].amount) - parseInt(req.body.amount);
+               if(req.body.transaction_type == "1") {
+                   var newAmount = parseInt(accountRes[0].amount) - parseInt(req.body.amount);
+               } else if(req.body.transaction_type == "2") {
+                   var newAmount = parseInt(accountRes[0].amount) + parseInt(req.body.amount);
+               }
                console.log("ROUTER: new amount is: " + newAmount);
                account.updateAccountAmount(req.body.account_type, newAmount, function(err, updateResponse) {
                   if(!err) {

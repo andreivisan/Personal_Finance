@@ -241,13 +241,9 @@
                                                 </div>
                                                 <div class="form-group"><label>ACCOUNT</label>
                                                     <select name="type" class="form-control m-b" name="account_type">
-                                                        <option value="Checking">Checking</option>
-                                                        <option value="Savings">Savings</option>
-                                                        <option value="Credit card">Credit Card</option>
-                                                        <option value="Investment">Investment</option>
-                                                        <option value="Real Estate loan">Real Estate loan</option>
-                                                        <option value="Other loans">Other loans</option>
-                                                        <option value="Cash">Cash</option>
+                                                        <% accounts.forEach(function(account) { %>
+                                                            <option value="<%= account.id %>"><%= account.name %></option>
+                                                        <% }) %>
                                                     </select>
                                                 </div>
                                                 <div class="form-group"><label>BUDGET</label>

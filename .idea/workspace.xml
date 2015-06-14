@@ -23,11 +23,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="account_details.ejs" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="account_details.ejs" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/account_details.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-16.875" vertical-offset="3150" max-vertical-offset="7155">
-              <caret line="237" column="127" selection-start-line="237" selection-start-column="127" selection-end-line="237" selection-end-column="127" />
+            <state vertical-scroll-proportion="0.46666667" vertical-offset="3240" max-vertical-offset="7095">
+              <caret line="244" column="111" selection-start-line="244" selection-start-column="111" selection-end-line="244" selection-end-column="111" />
               <folding>
                 <element signature="n#style#0;n#nav#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
@@ -39,20 +39,16 @@
         <entry file="file://$PROJECT_DIR$/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="233" max-vertical-offset="1350">
-              <caret line="66" column="47" selection-start-line="66" selection-start-column="31" selection-end-line="66" selection-end-column="47" />
-              <folding>
-                <marker date="1434292122000" expanded="true" signature="1588:1705" placeholder="{&quot;accounts&quot;: null...}" />
-                <marker date="1434292122000" expanded="true" signature="1957:2109" placeholder="{&quot;account&quot;: null...}" />
-                <marker date="1434292122000" expanded="true" signature="2667:2819" placeholder="{&quot;account&quot;: null...}" />
-              </folding>
+              <caret line="64" column="48" selection-start-line="64" selection-start-column="41" selection-end-line="64" selection-end-column="48" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="transactionType.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="transactionType.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/transaction_type/transactionType.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.17609392" vertical-offset="0" max-vertical-offset="937">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="525">
               <caret line="11" column="57" selection-start-line="11" selection-start-column="57" selection-end-line="11" selection-end-column="57" />
               <folding />
             </state>
@@ -80,8 +76,8 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/routes/index.js" />
-        <option value="$PROJECT_DIR$/views/account_details.ejs" />
         <option value="$PROJECT_DIR$/transaction_type/transactionType.js" />
+        <option value="$PROJECT_DIR$/views/account_details.ejs" />
       </list>
     </option>
   </component>
@@ -425,12 +421,12 @@
       <changelist id="291ac641-4505-4b35-9f0d-c95e52438bca" name="Default" comment="" />
       <created>1434290731797</created>
       <updated>1434290731797</updated>
-      <workItem from="1434290732493" duration="1620000" />
+      <workItem from="1434290732493" duration="1792000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1620000" />
+    <option name="totallyTimeSpent" value="1792000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1440" y="-75" width="1220" height="1057" extended-state="0" />
@@ -492,33 +488,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/transaction_type/transactionType.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="525">
+          <caret line="11" column="57" selection-start-line="11" selection-start-column="57" selection-end-line="11" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/routes/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="233" max-vertical-offset="1350">
-          <caret line="66" column="47" selection-start-line="66" selection-start-column="31" selection-end-line="66" selection-end-column="47" />
-          <folding>
-            <marker date="1434292122000" expanded="true" signature="1588:1705" placeholder="{&quot;accounts&quot;: null...}" />
-            <marker date="1434292122000" expanded="true" signature="1957:2109" placeholder="{&quot;account&quot;: null...}" />
-            <marker date="1434292122000" expanded="true" signature="2667:2819" placeholder="{&quot;account&quot;: null...}" />
-          </folding>
+          <caret line="64" column="48" selection-start-line="64" selection-start-column="41" selection-end-line="64" selection-end-column="48" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/account_details.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.875" vertical-offset="3150" max-vertical-offset="7155">
-          <caret line="237" column="127" selection-start-line="237" selection-start-column="127" selection-end-line="237" selection-end-column="127" />
+        <state vertical-scroll-proportion="0.46666667" vertical-offset="3240" max-vertical-offset="7095">
+          <caret line="244" column="111" selection-start-line="244" selection-start-column="111" selection-end-line="244" selection-end-column="111" />
           <folding>
             <element signature="n#style#0;n#nav#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/transaction_type/transactionType.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17609392" vertical-offset="0" max-vertical-offset="937">
-          <caret line="11" column="57" selection-start-line="11" selection-start-column="57" selection-end-line="11" selection-end-column="57" />
-          <folding />
         </state>
       </provider>
     </entry>

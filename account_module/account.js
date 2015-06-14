@@ -80,3 +80,23 @@ module.exports.getAccountById = function(accountId, callback) {
 //        });
     });
 }
+
+module.exports.updateAccountAmount = function(accountId, amount, callback) {
+    pool.getConnection(function(err, connection) {
+//        if(err) {
+//            connection.release();
+//            callback({"code" : 100, "status": "Error in connection database"}, null);
+//        }
+
+        console.log("ACCOUNT: connected as id " + connection.threadId);
+
+        connection.query("UPDATE account SET amount = ? WHERE id = ?", [parseInt(amount), parseInt(accountId)], function(err, results) {
+            connection.release();
+            callback(err, results);
+        });
+
+//        connection.on("error", function(err) {
+//            callback({"code" : 100, "status": "Error in connection database"}, null);
+//        });
+    });
+}

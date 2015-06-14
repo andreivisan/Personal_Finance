@@ -49,7 +49,8 @@ router.get('/account-details', function(req, res) {
                 accounts: null,
                 account: null,
                 transactionTypes: null,
-                budgets: null
+                budgets: null,
+                transactions: null
             });
         } else {
             account.getAccountById(req.param('accountId'), function(err, result) {
@@ -59,7 +60,8 @@ router.get('/account-details', function(req, res) {
                         accounts: results,
                         account: null,
                         transactionTypes: null,
-                        budgets: null
+                        budgets: null,
+                        transactions: null
                     });
                 }
                 if(result) {
@@ -67,25 +69,48 @@ router.get('/account-details', function(req, res) {
                        if(!err) {
                            budget.getAllBudgets(function(err, budgets) {
                               if(!err) {
+                                  transaction.getTransactionsByAccountId(req.param('accountId'), function(err, transactions) {
+                                      if(!err) {
+                                          res.render('account_details', {
+                                              accounts: results,
+                                              account: result[0],
+                                              transactionTypes: transactionTypes,
+                                              budgets: budgets,
+                                              transactions: transactions
+                                          });
+                                      } else {
+                                          console.log(JSON.stringify(err));
+                                          res.render('account_details', {
+                                              accounts: results,
+                                              account: result[0],
+                                              transactionTypes: transactionTypes,
+                                              budgets: budgets,
+                                              transactions: null
+                                          });
+                                      }
+                                  });
+                              } else {
+                                  console.log(JSON.stringify(err));
                                   res.render('account_details', {
                                       accounts: results,
                                       account: result[0],
                                       transactionTypes: transactionTypes,
-                                      budgets: budgets
+                                      budgets: null,
+                                      transactions: null
                                   });
                               }
                            });
+                       } else {
+                           res.render('account_details', {
+                               accounts: results,
+                               account: result[0],
+                               transactionTypes: null,
+                               budgets: null,
+                               transactions: null
+                           });
                        }
                     });
-                } else {
-                    res.render('account_details', {
-                        accounts: results,
-                        account: null,
-                        transactionTypes: null,
-                        budgets: null
-                    });
                 }
-
             });
         }
     });

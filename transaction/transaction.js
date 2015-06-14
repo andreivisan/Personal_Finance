@@ -42,5 +42,21 @@ module.exports.createTransaction = function(request, callback) {
 }
 
 module.exports.getTransactionsByAccountId = function(accountId, callback) {
+    pool.getConnection(function(err, connection) {
+//        if(err) {
+//            connection.release();
+//            callback({"code" : 100, "status": "Error in connection database"}, null);
+//        }
 
+        console.log("TRANSACTION: connected as id " + connection.threadId);
+
+        connection.query("SELECT * FROM transaction WHERE account_id = ?", [parseInt(accountId)], function(err, results) {
+            connection.release();
+            callback(err, results);
+        });
+
+//        connection.on("error", function(err) {
+//            callback({"code" : 100, "status": "Error in connection database"}, null);
+//        });
+    });
 }

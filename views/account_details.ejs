@@ -294,15 +294,19 @@
                           </tr>
                         </thead>
                         <tbody>
-                            <tr class="gradeX">
-                                <td>&nbsp;</td>
-                                <td>Project <small>This is example of project</small></td>
-                                <td>Patrick Smith</td>
-                                <td>0800 051213</td>
-                                <td>Inceptos Hymenaeos Ltd</td>
-                                <td><span class="pie">0.52/1.561</span></td>
-                                <td>20%</td>
-                            </tr>
+                            <% if(transactions) { %>
+                                <% transactions.forEach(function(transaction) { %>
+                                    <tr class="gradeX">
+                                        <td>&nbsp;</td>
+                                        <td><%= transaction.date %></td>
+                                        <td><%= transaction.amount %></td>
+                                        <td><%= transaction.description %></td>
+                                        <td><%= transaction.transaction_type_id %></td>
+                                        <td><%= transaction.account_id %></td>
+                                        <td><%= transaction.budget_id %></td>
+                                    </tr>
+                                <% }) %>
+                            <% } %>
                         </tbody>
                         <tfoot>
                           <tr>
@@ -323,7 +327,7 @@
       </div>
 
   </div>
-  
+
   <div class="footer">
     <div class="pull-right">
       10GB of <strong>250GB</strong> Free.

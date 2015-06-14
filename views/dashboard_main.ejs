@@ -55,7 +55,7 @@
                 <ul class="nav nav-second-level">
                     <% if(accounts) { %>
                         <% accounts.forEach(function(account) { %>
-                            <li><a href="#"><%= account.name %></a> : <%= account.amount %></li>
+                            <li><a href="/account-details?accountId=<%= account.id %>"><%= account.name %> : <%= account.amount %></a></li>
                         <% }) %>
                     <% } %>
                     <li><a href="#modal-form" data-toggle="modal">Add account</a></li>

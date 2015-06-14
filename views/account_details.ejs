@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PERSONAL BUDGET | Main dashboard</title>
+
+    <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
+    <link href="stylesheets/font-awesome/font-awesome.css" rel="stylesheet">
+
+    <!-- Morris -->
+    <link href="stylesheets/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+
+    <link href="stylesheets/plugins/datapicker/datepicker3.css" rel="stylesheet">
+
+    <link href="stylesheets/animate.css" rel="stylesheet">
+    <link href="stylesheets/style.css" rel="stylesheet">
+    <link href="stylesheets/custom.css" rel="stylesheet">
+
+</head>
+
+<body>
+<div id="wrapper">
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav" id="side-menu">
+            <li class="nav-header">
+                <div class="dropdown profile-element"> <span>
+                            <img alt="image" class="img-circle" src="img/profile_small.jpg" />
+                             </span>
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">David Williams</strong>
+                             </span> <span class="text-muted text-xs block">Art Director <b class="caret"></b></span> </span> </a>
+                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                        <li><a href="profile.html">Profile</a></li>
+                        <li><a href="contacts.html">Contacts</a></li>
+                        <li><a href="mailbox.html">Mailbox</a></li>
+                        <li class="divider"></li>
+                        <li><a href="login.html">Logout</a></li>
+                    </ul>
+                </div>
+                <div class="logo-element">
+                    IN+
+                </div>
+            </li>
+            <li>
+                <a href="/main-dashboard"><i class="fa fa-th-large"></i> <span class="nav-label">DASHBOARD</span> <span class="fa"></span></a>
+            </li>
+            <li>
+                <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">TRANSACTIONS</span> <span class="fa"></span></a>
+            </li>
+            <li class="active">
+                <a href="layouts.html"><i class="fa fa-diamond"></i> <span class="nav-label">ACCOUNTS</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <% if(accounts) { %>
+                        <% accounts.forEach(function(account) { %>
+                            <li><a href="/account-details?accountId=<%= account.id %>"><%= account.name %> : <%= account.amount %></a></li>
+                        <% }) %>
+                    <% } %>
+                    <li><a href="#modal-form" data-toggle="modal">Add account</a></li>
+                    <div id="modal-form" class="modal fade" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="add-account-modal"><h3 class="m-t-none m-b">ADD ACCOUNT</h3>
+                                            <form action="/add-account" id="addAccountForm" method="post" role="form">
+                                                <div class="form-group"><label>FINANCIAL INSTITUTION</label> <input name="financial_institution" type="text" placeholder="Your bank E.g. ING" class="form-control"></div>
+                                                <div class="form-group"><label>ACCOUNT NAME</label> <input name="name" type="text" placeholder="Unique account name" class="form-control"></div>
+                                                <div class="form-group"><label>AMOUNT</label> <input name="amount" type="number" placeholder="Account balance" class="form-control"></div>
+                                                <div class="form-group"><label>CURRENCY</label>
+                                                    <select name="currency" class="form-control m-b" name="currency">
+                                                        <option value="EUR">EUR</option>
+                                                        <option value="USD">USD</option>
+                                                        <option value="RON">RON</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group"><label>ACCOUNT TYPE</label>
+                                                    <select name="type" class="form-control m-b" name="account_type">
+                                                        <option value="Checking">Checking</option>
+                                                        <option value="Savings">Savings</option>
+                                                        <option value="Credit card">Credit Card</option>
+                                                        <option value="Investment">Investment</option>
+                                                        <option value="Real Estate loan">Real Estate loan</option>
+                                                        <option value="Other loans">Other loans</option>
+                                                        <option value="Cash">Cash</option>
+                                                    </select>
+                                                </div>
+                                                <div>
+                                                    <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong>ADD ACCOUNT</strong></button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">STATISTICS</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li><a href="graph_flot.html">Expenses</a></li>
+                    <li><a href="graph_morris.html">Savings</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="mailbox.html"><i class="fa fa-edit"></i> <span class="nav-label">BUDGET PLANNING </span></a>
+            </li>
+        </ul>
+
+    </div>
+</nav>
+
+<div id="page-wrapper" class="gray-bg">
+  <div class="row border-bottom">
+    <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+      <div class="navbar-header">
+        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+        <form role="search" class="navbar-form-custom" action="search_results.html">
+          <div class="form-group">
+            <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
+          </div>
+        </form>
+      </div>
+      <ul class="nav navbar-top-links navbar-right">
+        <li>
+          <span class="m-r-sm text-muted welcome-message">Welcome to INSPINIA+ Admin Theme.</span>
+        </li>
+
+        <li>
+          <a href="login.html">
+            <i class="fa fa-sign-out"></i> Log out
+          </a>
+        </li>
+      </ul>
+
+    </nav>
+  </div>
+
+  <div class="wrapper-content">
+      <% if(account) { %>
+
+          <div class="row wrapper border-bottom white-bg page-heading">
+              <div class="col-lg-9">
+                  <h2><%= account.name %></h2>
+              </div>
+          </div>
+
+          <div class="col-md-2 account-details-ibox-width">
+            <div class="ibox float-e-margins">
+              <div class="ibox-title">
+                <span class="label label-success pull-right">Monthly</span>
+                <h5>Income</h5>
+              </div>
+              <div class="ibox-content">
+                <h1 class="no-margins">3200 EUR</h1>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-2 account-details-ibox-width">
+            <div class="ibox float-e-margins">
+              <div class="ibox-title">
+                <span class="label label-info pull-right">Current month</span>
+                <h5>Available</h5>
+              </div>
+              <div class="ibox-content">
+                <h1 class="no-margins"><%= account.amount%> <%= account.currency %></h1>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-2 account-details-ibox-width">
+              <div class="ibox float-e-margins">
+                  <div class="ibox-title">
+                      <span class="label label-info pull-right">Current Month</span>
+                      <h5>Expenses</h5>
+                  </div>
+                  <div class="ibox-content">
+                      <h1 class="no-margins">2000 EUR</h1>
+                  </div>
+              </div>
+          </div>
+      <% } %>
+  </div>
+
+  <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+
+    <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+    <div class="ibox-title">
+        <h5>TRANSACTIONS </h5>
+        <div class="ibox-tools">
+            <a class="collapse-link">
+                <i class="fa fa-chevron-up"></i>
+            </a>
+            <a class="close-link">
+                <i class="fa fa-times"></i>
+            </a>
+        </div>
+    </div>
+    <div class="ibox-content">
+        <div class="row">
+            <div class="col-sm-9 m-b-xs">
+                <div data-toggle="buttons" class="btn-group">
+                    <div class="text-center">
+                        <a href="#transaction-modal" class="btn btn-primary" data-toggle="modal">ADD TRANSACTION</a>
+                    </div>
+
+                    <div id="transaction-modal" class="modal fade" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="add-account-modal"><h3 class="m-t-none m-b">ADD TRANSACTION</h3>
+                                            <form action="/add-account" id="addAccountForm" method="post" role="form">
+                                                <div class="form-group"><label>DESCRIPTION</label> <input name="description" type="text" class="form-control"></div>
+                                                <div class="form-group"><label>AMOUNT</label> <input name="amount" type="number" class="form-control"></div>
+                                                <div class="form-group" id="data_1">
+                                                    <label class="font-noraml">DATE</label>
+                                                    <div class="input-group date">
+                                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" value="03/04/2014">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group"><label>TYPE</label>
+                                                    <select name="currency" class="form-control m-b" name="currency">
+                                                        <option value="EUR">EUR</option>
+                                                        <option value="USD">USD</option>
+                                                        <option value="RON">RON</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group"><label>ACCOUNT</label>
+                                                    <select name="type" class="form-control m-b" name="account_type">
+                                                        <option value="Checking">Checking</option>
+                                                        <option value="Savings">Savings</option>
+                                                        <option value="Credit card">Credit Card</option>
+                                                        <option value="Investment">Investment</option>
+                                                        <option value="Real Estate loan">Real Estate loan</option>
+                                                        <option value="Other loans">Other loans</option>
+                                                        <option value="Cash">Cash</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group"><label>BUDGET</label>
+                                                    <select name="type" class="form-control m-b" name="budget">
+                                                        <option value="Checking">Checking</option>
+                                                        <option value="Savings">Savings</option>
+                                                        <option value="Credit card">Credit Card</option>
+                                                        <option value="Investment">Investment</option>
+                                                        <option value="Real Estate loan">Real Estate loan</option>
+                                                        <option value="Other loans">Other loans</option>
+                                                        <option value="Cash">Cash</option>
+                                                    </select>
+                                                </div>
+                                                <div>
+                                                    <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong>ADD TRANSACTION</strong></button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <input type="text" placeholder="Search" class="input-sm form-control">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-sm btn-primary"> Go!</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>DATE </th>
+                        <th>AMOUNT </th>
+                        <th>DESCRIPTION </th>
+                        <th>TYPE </th>
+                        <th>ACCOUNT </th>
+                        <th>BUDGET</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>Project <small>This is example of project</small></td>
+                        <td>Patrick Smith</td>
+                        <td>0800 051213</td>
+                        <td>Inceptos Hymenaeos Ltd</td>
+                        <td><span class="pie">0.52/1.561</span></td>
+                        <td>20%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    </div>
+    </div>
+
+    </div>
+  </div>
+  <div class="footer">
+    <div class="pull-right">
+      10GB of <strong>250GB</strong> Free.
+    </div>
+    <div>
+      <strong>Copyright</strong> Example Company &copy; 2014-2015
+    </div>
+  </div>
+
+</div>
+</div>
+
+
+<!-- Mainly scripts -->
+<script src="javascripts/jquery-2.1.1.js"></script>
+<script src="javascripts/bootstrap.min.js"></script>
+<script src="javascripts/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="javascripts/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- Flot -->
+<script src="javascripts/plugins/flot/jquery.flot.js"></script>
+<script src="javascripts/plugins/flot/jquery.flot.tooltip.min.js"></script>
+<script src="javascripts/plugins/flot/jquery.flot.spline.js"></script>
+<script src="javascripts/plugins/flot/jquery.flot.resize.js"></script>
+<script src="javascripts/plugins/flot/jquery.flot.pie.js"></script>
+<script src="javascripts/plugins/flot/jquery.flot.symbol.js"></script>
+<script src="javascripts/plugins/flot/curvedLines.js"></script>
+
+<!-- Peity -->
+<script src="javascripts/plugins/peity/jquery.peity.min.js"></script>
+<script src="javascripts/demo/peity-demo.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="javascripts/inspinia.js"></script>
+<script src="javascripts/plugins/pace/pace.min.js"></script>
+
+<!-- jQuery UI -->
+<script src="javascripts/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+<!-- Jvectormap -->
+<script src="javascripts/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="javascripts/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+
+<!-- Sparkline -->
+<script src="javascripts/plugins/sparkline/jquery.sparkline.min.js"></script>
+
+<!-- Sparkline demo data  -->
+<script src="javascripts/demo/sparkline-demo.js"></script>
+
+<!-- ChartJS-->
+<script src="javascripts/plugins/chartJs/Chart.min.js"></script>
+
+<!-- Data picker -->
+<script src="javascripts/plugins/datapicker/bootstrap-datepicker.js"></script>
+
+<script>
+    $("#data_1 .date").datepicker({
+        todayBtn: "linked",
+        keyboardNavigation: false,
+        forceParse: false,
+        calendarWeeks: true,
+        autoclose: true
+    });
+
+    $(document).ready(function() {
+
+        var d1 = [[1262304000000, 6], [1264982400000, 3057], [1267401600000, 20434], [1270080000000, 31982], [1272672000000, 26602], [1275350400000, 27826], [1277942400000, 24302], [1280620800000, 24237], [1283299200000, 21004], [1285891200000, 12144], [1288569600000, 10577], [1291161600000, 10295]];
+        var d2 = [[1262304000000, 5], [1264982400000, 200], [1267401600000, 1605], [1270080000000, 6129], [1272672000000, 11643], [1275350400000, 19055], [1277942400000, 30062], [1280620800000, 39197], [1283299200000, 37000], [1285891200000, 27000], [1288569600000, 21000], [1291161600000, 17000]];
+
+        var data1 = [
+            { label: "Data 1", data: d1, color: '#17a084'},
+            { label: "Data 2", data: d2, color: '#127e68' }
+        ];
+        $.plot($("#flot-chart1"), data1, {
+            xaxis: {
+                tickDecimals: 0
+            },
+            series: {
+                lines: {
+                    show: true,
+                    fill: true,
+                    fillColor: {
+                        colors: [{
+                            opacity: 1
+                        }, {
+                            opacity: 1
+                        }]
+                    }
+                },
+                points: {
+                    width: 0.1,
+                    show: false
+                }
+            },
+            grid: {
+                show: false,
+                borderWidth: 0
+            },
+            legend: {
+                show: false
+            }
+        });
+
+        var lineData = {
+            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            datasets: [
+                {
+                    label: "Example dataset",
+                    fillColor: "rgba(220,220,220,0.5)",
+                    strokeColor: "rgba(220,220,220,1)",
+                    pointColor: "rgba(220,220,220,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(220,220,220,1)",
+                    data: [65, 59, 40, 51, 36, 25, 40]
+                },
+                {
+                    label: "Example dataset",
+                    fillColor: "rgba(26,179,148,0.5)",
+                    strokeColor: "rgba(26,179,148,0.7)",
+                    pointColor: "rgba(26,179,148,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(26,179,148,1)",
+                    data: [48, 48, 60, 39, 56, 37, 30]
+                }
+            ]
+        };
+
+        var lineOptions = {
+            scaleShowGridLines: true,
+            scaleGridLineColor: "rgba(0,0,0,.05)",
+            scaleGridLineWidth: 1,
+            bezierCurve: true,
+            bezierCurveTension: 0.4,
+            pointDot: true,
+            pointDotRadius: 4,
+            pointDotStrokeWidth: 1,
+            pointHitDetectionRadius: 20,
+            datasetStroke: true,
+            datasetStrokeWidth: 2,
+            datasetFill: true,
+            responsive: true
+        };
+
+
+        var ctx = document.getElementById("lineChart").getContext("2d");
+        var myNewChart = new Chart(ctx).Line(lineData, lineOptions);
+
+    });
+</script>
+</body>
+</html>

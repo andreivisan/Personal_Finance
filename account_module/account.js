@@ -23,11 +23,10 @@ module.exports.createAccount = function(request, callback) {
     };
 
     pool.getConnection(function(err, connection) {
-        if(err) {
-            connection.release();
-            callback({"code" : 100, "status": "Error in connection database"}, null);
-            return;
-        }
+//        if(err) {
+//            connection.release();
+//            callback({"code" : 100, "status": "Error in connection database"}, null);
+//        }
 
         console.log("ACCOUNT: connected as id " + connection.threadId);
 
@@ -36,20 +35,18 @@ module.exports.createAccount = function(request, callback) {
             callback(err, result);
         });
 
-        connection.on("error", function(err) {
-            callback({"code" : 100, "status": "Error in connection database"}, null);
-            return;
-        });
+//        connection.on("error", function(err) {
+//            callback({"code" : 100, "status": "Error in connection database"}, null);
+//        });
     });
 }
 
 module.exports.getAllAccounts = function(callback) {
     pool.getConnection(function(err, connection) {
-        if(err) {
-            connection.release();
-            callback({"code" : 100, "status": "Error in connection database"}, null);
-            return;
-        }
+//        if(err) {
+//            connection.release();
+//            callback({"code" : 100, "status": "Error in connection database"}, null);
+//        }
 
         console.log("ACCOUNT: connected as id " + connection.threadId);
 
@@ -58,9 +55,28 @@ module.exports.getAllAccounts = function(callback) {
             callback(err, results);
         });
 
-        connection.on("error", function(err) {
-            callback({"code" : 100, "status": "Error in connection database"}, null);
-            return;
+//        connection.on("error", function(err) {
+//            callback({"code" : 100, "status": "Error in connection database"}, null);
+//        });
+    });
+}
+
+module.exports.getAccountById = function(accountId, callback) {
+    pool.getConnection(function(err, connection) {
+//        if(err) {
+//            connection.release();
+//            callback({"code" : 100, "status": "Error in connection database"}, null);
+//        }
+
+        console.log("ACCOUNT: connected as id " + connection.threadId);
+
+        connection.query("SELECT * FROM account WHERE id = ?", [parseInt(accountId)], function(err, results) {
+            connection.release();
+            callback(err, results);
         });
+
+//        connection.on("error", function(err) {
+//            callback({"code" : 100, "status": "Error in connection database"}, null);
+//        });
     });
 }

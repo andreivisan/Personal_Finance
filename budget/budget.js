@@ -28,3 +28,23 @@ module.exports.getAllBudgets = function(callback) {
 //        });
     });
 }
+
+module.exports.getBudgetById = function(budgetId, callback) {
+    pool.getConnection(function(err, connection) {
+//        if(err) {
+//            connection.release();
+//            callback({"code" : 100, "status": "Error in connection database"}, null);
+//        }
+
+        console.log("BUDGET: connected as id " + connection.threadId);
+
+        connection.query("SELECT * FROM budget WHERE id = ?", [parseInt(budgetId)], function(err, results) {
+            connection.release();
+            callback(err, results);
+        });
+
+//        connection.on("error", function(err) {
+//            callback({"code" : 100, "status": "Error in connection database"}, null);
+//        });
+    });
+}

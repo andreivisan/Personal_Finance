@@ -28,3 +28,23 @@ module.exports.getAllTransactionTypes = function(callback) {
 //        });
     });
 }
+
+module.exports.getTransactionTypeById = function(transactionTypeId, callback) {
+    pool.getConnection(function(err, connection) {
+//        if(err) {
+//            connection.release();
+//            callback({"code" : 100, "status": "Error in connection database"}, null);
+//        }
+
+        console.log("TRANSACTION TYPE: connected as id " + connection.threadId);
+
+        connection.query("SELECT * FROM transaction_type WHERE id = ?", [parseInt(transactionTypeId)], function(err, results) {
+            connection.release();
+            callback(err, results);
+        });
+
+//        connection.on("error", function(err) {
+//            callback({"code" : 100, "status": "Error in connection database"}, null);
+//        });
+    });
+}

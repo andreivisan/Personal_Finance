@@ -30,104 +30,40 @@ router.post('/add-account', function(req, res) {
 });
 
 router.get('/account-details', function(req, res) {
-//    account.getAllAccounts(function(err, results) {
-//        if(err) {
-//            console.log("ROUTER: ERROR " + JSON.stringify(err));
-//            res.render('account_details', {
-//                accounts: null,
-//                account: null,
-//                transactionTypes: null,
-//                budgets: null,
-//                transactions: null
-//            });
-//        } else {
-//            account.getAccountById(req.param('accountId'), function(err, result) {
-//                if(err) {
-//                    console.log("ROUTER: ERROR " + JSON.stringify(err));
-//                    res.render('account_details', {
-//                        accounts: results,
-//                        account: null,
-//                        transactionTypes: null,
-//                        budgets: null,
-//                        transactions: null
-//                    });
-//                }
-//                if(result) {
-//                    transactionType.getAllTransactionTypes(function(err, transactionTypes) {
-//                       if(!err) {
-//                           budget.getAllBudgets(function(err, budgets) {
-//                              if(!err) {
-//                                  transaction.getTransactionsByAccountId(req.param('accountId'), function(err, transactions) {
-//                                      if(!err) {
-//                                          prettyfiTransaction(transactions).then(function(prettyTransactions) {
-//                                              console.log("***" + JSON.stringify(prettyTransactions));
-//                                              for(var i=0; i<prettyTransactions.length; i++) {
-//                                                  if(prettyTransactions[i]) {
-//                                                      var prettyTransactionsRet = prettyTransactions[i];
-//                                                      return prettyTransactionsRet;
-//                                                  }
-//                                              }
-//                                          }).then(function(prettyTransactions) {
-//                                              res.render('account_details', {
-//                                                  accounts: results,
-//                                                  account: result[0],
-//                                                  transactionTypes: transactionTypes,
-//                                                  budgets: budgets,
-//                                                  transactions: prettyTransactions
-//                                              });
-//                                          });
-//                                      } else {
-//                                          console.log(JSON.stringify(err));
-//                                          res.render('account_details', {
-//                                              accounts: results,
-//                                              account: result[0],
-//                                              transactionTypes: transactionTypes,
-//                                              budgets: budgets,
-//                                              transactions: null
-//                                          });
-//                                      }
-//                                  });
-//                              } else {
-//                                  console.log(JSON.stringify(err));
-//                                  res.render('account_details', {
-//                                      accounts: results,
-//                                      account: result[0],
-//                                      transactionTypes: transactionTypes,
-//                                      budgets: null,
-//                                      transactions: null
-//                                  });
-//                              }
-//                           });
-//                       } else {
-//                           res.render('account_details', {
-//                               accounts: results,
-//                               account: result[0],
-//                               transactionTypes: null,
-//                               budgets: null,
-//                               transactions: null
-//                           });
-//                       }
-//                    });
-//                }
-//            });
-//        }
-//    });
+    var accountDetailsResponse = {
+        accounts: null,
+        account: null,
+        budgets: null,
+        transactions: null,
+        transactionTypes: null
+    }
 
-    models.Account.findAll({
-        where: {
-            id: req.param('accountId')
-        },
-        include: [models.Transaction]
-    }).then(function(account) {
-        res.render('account_details', {
-                       accounts: null,
-                       account: account,
-                       transactionTypes: null,
-                       budgets: null,
-                       transactions: null
-                   });
+    models.Account.all().then(function(accounts) {
+        accountDetailsResponse.accounts = accounts;
+        return accountDetailsResponse;
+    }).then(function(accountDetailsResponse) {
+        models.Budget.all().then(function(budgets) {
+            accountDetailsResponse.budgets = budgets;
+            return accountDetailsResponse;
+        }).then(function(accountDetailsResponse) {
+            models.TransactionType.all().then(function(transactionTypes){
+                accountDetailsResponse.transactionTypes = transactionTypes;
+                return accountDetailsResponse;
+            }).then(function(accountDetailsResponse){
+                models.Account.findAll({
+                    where: {
+                        id: req.param('accountId')
+                    },
+                    include: [models.Transaction]
+                }).then(function(account) {
+                    accountDetailsResponse.account = account;
+                    accountDetailsResponse.transactions - account.Transactions;
+                    console.log("=======> ACCOUNT DETAILS RESPONSE: " + JSON.stringify(accountDetailsResponse));
+                    res.render('account_details', {accountDetailsResponse: accountDetailsResponse});
+                });
+            });
+        });
     });
-
 });
 
 router.post('/insert-transaction', function(req, res) {

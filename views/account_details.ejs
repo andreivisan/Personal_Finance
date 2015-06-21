@@ -64,8 +64,8 @@
             <li class="active">
                 <a href="layouts.html"><i class="fa fa-diamond"></i> <span class="nav-label">ACCOUNTS</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <% if(accounts) { %>
-                        <% accounts.forEach(function(account) { %>
+                    <% if(accountDetailsResponse.accounts) { %>
+                        <% accountDetailsResponse.accounts.forEach(function(account) { %>
                             <li><a href="/account-details?accountId=<%= account.id %>"><%= account.name %></a></li>
                         <% }) %>
                     <% } %>
@@ -152,11 +152,11 @@
   </div>
 
   <div class="wrapper-content">
-      <% if(account) { %>
+      <% if(accountDetailsResponse.account) { %>
 
           <div class="row wrapper border-bottom white-bg page-heading">
               <div class="col-lg-9">
-                  <h2><%= account.name %></h2>
+                  <h2><%= accountDetailsResponse.account.name %></h2>
               </div>
           </div>
 
@@ -179,7 +179,7 @@
                 <h5>Available</h5>
               </div>
               <div class="ibox-content">
-                <h1 class="no-margins"><%= account.amount%> <%= account.currency %></h1>
+                <h1 class="no-margins"><%= accountDetailsResponse.account[0].amount%> <%= accountDetailsResponse.account[0].currency %></h1>
               </div>
             </div>
           </div>
@@ -249,21 +249,21 @@
                                                         </div>
                                                         <div class="form-group"><label>TYPE</label>
                                                             <select name="transaction_type" class="form-control m-b">
-                                                                <% transactionTypes.forEach( function(transactionType) {  %>
+                                                                <% accountDetailsResponse.transactionTypes.forEach( function(transactionType) {  %>
                                                                 <option value="<%= transactionType.id %>"><%= transactionType.type %></option>
                                                                 <% }) %>
                                                             </select>
                                                         </div>
                                                         <div class="form-group"><label>ACCOUNT</label>
                                                             <select name="account_type" class="form-control m-b">
-                                                                <% accounts.forEach(function(account) { %>
+                                                                <% accountDetailsResponse.accounts.forEach(function(account) { %>
                                                                 <option value="<%= account.id %>"><%= account.name %></option>
                                                                 <% }) %>
                                                             </select>
                                                         </div>
                                                         <div class="form-group"><label>BUDGET</label>
                                                             <select name="budget" class="form-control m-b">
-                                                                <% budgets.forEach(function(budget) { %>
+                                                                <% accountDetailsResponse.budgets.forEach(function(budget) { %>
                                                                 <option value="<%= budget.id %>"><%= budget.name %></option>
                                                                 <% }) %>
                                                             </select>
@@ -294,8 +294,8 @@
                           </tr>
                         </thead>
                         <tbody>
-                            <% if(account.Transactions) { %>
-                                <% account.Transactions.forEach(function(transaction) { %>
+                            <% if(accountDetailsResponse.transactions) { %>
+                                <% accountDetailsResponse.transactions.forEach(function(transaction) { %>
                                     <tr class="gradeX">
                                         <td>&nbsp;</td>
                                         <td><%= transaction.date %></td>

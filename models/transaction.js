@@ -17,7 +17,7 @@ module.exports = function(sequelize, DataTypes) {
     }, {
         classMethods: {
             associate: function(models) {
-                Transaction.hasOne(models.TransactionType);
+                Transaction.belongsTo(models.TransactionType);
                 Transaction.belongsTo(models.Account);
                 Transaction.belongsTo(models.Budget);
             }

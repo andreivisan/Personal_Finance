@@ -18,11 +18,12 @@ router.get('/main-dashboard', function(req, res) {
 
 router.post('/add-account', function(req, res) {
     models.Account
-        .build({financialInstitution: req.body.financial_institution,
-                name: req.body.name,
-                currency: req.body.currency,
-                type: req.body.type,
-                amount: parseInt(req.body.amount)})
+        .build({
+            financialInstitution: req.body.financial_institution,
+            name: req.body.name,
+            currency: req.body.currency,
+            type: req.body.type,
+            amount: parseInt(req.body.amount)})
         .save()
         .then(function() {
             res.redirect('/main-dashboard');
@@ -57,8 +58,7 @@ router.get('/account-details', function(req, res) {
                     include: [models.Transaction]
                 }).then(function(account) {
                     accountDetailsResponse.account = account;
-                    accountDetailsResponse.transactions - account.Transactions;
-                    console.log("=======> ACCOUNT DETAILS RESPONSE: " + JSON.stringify(accountDetailsResponse));
+                    accountDetailsResponse.transactions = account[0].Transactions;
                     res.render('account_details', {accountDetailsResponse: accountDetailsResponse});
                 });
             });
@@ -67,29 +67,18 @@ router.get('/account-details', function(req, res) {
 });
 
 router.post('/insert-transaction', function(req, res) {
-    transaction.createTransaction(req, function(err, response) {
-       if(!err) {
-           account.getAccountById(req.body.account_type, function(err, accountRes) {
-               if(req.body.transaction_type == "1") {
-                   var newAmount = parseInt(accountRes[0].amount) - parseInt(req.body.amount);
-               } else if(req.body.transaction_type == "2") {
-                   var newAmount = parseInt(accountRes[0].amount) + parseInt(req.body.amount);
-               }
-               console.log("ROUTER: new amount is: " + newAmount);
-               account.updateAccountAmount(req.body.account_type, newAmount, function(err, updateResponse) {
-                  if(!err) {
-                      res.redirect('/account-details?accountId=' + req.body.account_type);
-                  } else {
-                      console.log(JSON.stringify(err));
-                      res.redirect('/account-details?accountId=' + req.body.account_type);
-                  }
-               });
-           });
-       } else {
-           console.log(JSON.stringify(err));
-           res.redirect('/account-details?accountId=' + req.body.account_type);
-       }
-    });
+    models.Transaction
+        .build({
+            description: req.body.description,
+            amount: parseInt(req.body.amount),
+            BudgetId: parseInt(req.body.budget),
+            date: new Date(req.body.date).toISOString().slice(0, 19).replace('T', ' '),
+            AccountId: parseInt(req.body.account_type),
+            TransactionTypeId: parseInt(req.body.transaction_type)})
+        .save()
+        .then(function() {
+            res.redirect('/account-details?accountId=' + req.body.account_type);
+        });
 })
 
 router.get('/test', function(req, res) {

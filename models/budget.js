@@ -1,35 +1,34 @@
 "use strict"
 
 module.exports = function(sequelize, DataTypes) {
-    var Account = sequelize.define("Account", {
-        financialInstitution: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
+    var Budget = sequelize.define("Budget", {
         name: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        currency: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        type: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        amount: {
+        limit: {
             type: DataTypes.DOUBLE,
+            allowNull: false
+        },
+        period: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        rollover: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false
+        },
+        rolloverData: {
+            type: DataTypes.DATE,
             allowNull: false
         }
     }, {
         classMethods: {
             associate: function(models) {
-                Account.hasMany(models.Transaction);
+                Budget.hasMany(models.Transaction);
             }
         }
     });
 
-    return Account;
+    return Budget;
 }
-

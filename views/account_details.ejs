@@ -294,16 +294,16 @@
                           </tr>
                         </thead>
                         <tbody>
-                            <% if(transactions) { %>
-                                <% transactions.forEach(function(transaction) { %>
+                            <% if(account.Transactions) { %>
+                                <% account.Transactions.forEach(function(transaction) { %>
                                     <tr class="gradeX">
                                         <td>&nbsp;</td>
                                         <td><%= transaction.date %></td>
                                         <td><%= transaction.amount %></td>
                                         <td><%= transaction.description %></td>
-                                        <td><%= transaction.transactionType %></td>
-                                        <td><%= transaction.account %></td>
-                                        <td><%= transaction.budget %></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
                                     </tr>
                                 <% }) %>
                             <% } %>

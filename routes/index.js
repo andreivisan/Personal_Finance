@@ -95,14 +95,17 @@ router.post('/insert-transaction', function(req, res) {
         .then(function() {
             res.redirect('/account-details?accountId=' + req.body.account_type);
         });
-})
+});
 
-router.get('/test', function(req, res) {
-    transaction.getTransactions(function(err, transactions) {
-       prettyfiTransaction(transactions).then(function(prettyTransactions) {
-          console.log("***" + JSON.stringify(prettyTransactions));
-       });
-    });
+router.get('/delete-transaction', function(req, res) {
+    models.Transaction
+        .destroy({
+            where: {
+              id: req.param("transactionId")
+            }
+        }).then(function() {
+            res.redirect('/account-details?accountId=' + req.param("accountId"));
+        });
 });
 
 module.exports = router;

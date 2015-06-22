@@ -281,7 +281,11 @@
                             <% if(accountDetailsResponse.transactions) { %>
                                 <% accountDetailsResponse.transactions.forEach(function(transaction) { %>
                                     <tr class="gradeX">
-                                        <td>&nbsp;</td>
+                                        <td>
+                                            <a href="/delete-transaction?transactionId=<%= transaction.id%>&accountId=<%= accountDetailsResponse.account[0].id%>">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                        </td>
                                         <td><%= transaction.date %></td>
                                         <td><%= transaction.amount %></td>
                                         <td><%= transaction.description %></td>

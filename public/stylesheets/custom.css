@@ -13,3 +13,14 @@
     padding-bottom: 10px !important;
     font-size: 15px !important;
 }
+
+.logo-dimensions {
+    padding: 0px !important;
+}
+
+.logo-text-style {
+    font-size: 18px !important;
+    color: white;
+    font-weight: bold;
+    margin-left: 10px;
+}

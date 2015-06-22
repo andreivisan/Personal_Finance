@@ -60,7 +60,6 @@ router.get('/account-details', function(req, res) {
                     accountDetailsResponse.account = account;
                     accountDetailsResponse.transactions = account[0].Transactions;
                     decorateTransactionList(accountDetailsResponse.transactions).then(function(decoratedTransactions) {
-                        console.log("=======> decorated tx: " + JSON.stringify(decoratedTransactions));
                         accountDetailsResponse.transactions = decoratedTransactions;
                         res.render('account_details', {accountDetailsResponse: accountDetailsResponse});
                     });

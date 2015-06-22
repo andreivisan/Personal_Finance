@@ -24,3 +24,7 @@
     font-weight: bold;
     margin-left: 10px;
 }
+
+.add-tx-table-button-padding {
+    padding: 0px !important;
+}

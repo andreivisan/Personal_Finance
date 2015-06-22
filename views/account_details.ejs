@@ -156,7 +156,7 @@
 
           <div class="row wrapper border-bottom white-bg page-heading">
               <div class="col-lg-9">
-                  <h2><%= accountDetailsResponse.account.name %></h2>
+                  <h2><%= accountDetailsResponse.account[0].name %></h2>
               </div>
           </div>
 
@@ -301,9 +301,9 @@
                                         <td><%= transaction.date %></td>
                                         <td><%= transaction.amount %></td>
                                         <td><%= transaction.description %></td>
-                                        <td>assa</td>
+                                        <td><%= transaction.TransactionTypeId %></td>
                                         <td><%= accountDetailsResponse.account[0].name %></td>
-                                        <td>asa</td>
+                                        <td><%= transaction.BudgetId %></td>
                                     </tr>
                                 <% }) %>
                             <% } %>

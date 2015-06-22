@@ -59,12 +59,28 @@ router.get('/account-details', function(req, res) {
                 }).then(function(account) {
                     accountDetailsResponse.account = account;
                     accountDetailsResponse.transactions = account[0].Transactions;
-                    res.render('account_details', {accountDetailsResponse: accountDetailsResponse});
+                    decorateTransactionList(accountDetailsResponse.transactions).then(function(decoratedTransactions) {
+                        console.log("=======> decorated tx: " + JSON.stringify(decoratedTransactions));
+                        accountDetailsResponse.transactions = decoratedTransactions;
+                        res.render('account_details', {accountDetailsResponse: accountDetailsResponse});
+                    });
                 });
             });
         });
     });
 });
+
+function decorateTransactionList(transactions) {
+    return Promise.map(transactions, function(transaction) {
+        return transaction.getBudget().then(function(budget) {
+            transaction.BudgetId = budget.name;
+            return transaction.getTransactionType().then(function(transactionType) {
+                transaction.TransactionTypeId = transactionType.type;
+                return transaction;
+            });
+        });
+    });
+}
 
 router.post('/insert-transaction', function(req, res) {
     models.Transaction

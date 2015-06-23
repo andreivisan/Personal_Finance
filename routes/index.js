@@ -92,7 +92,16 @@ router.post('/insert-transaction', function(req, res) {
             TransactionTypeId: parseInt(req.body.transaction_type)})
         .save()
         .then(function() {
-            res.redirect('/account-details?accountId=' + req.body.account_type);
+            models.Account.findAll({
+              where: {
+                id: req.body.account_type
+              }
+            }).then(function(account) {
+                account[0].amount = account[0].amount - parseInt(req.body.amount);
+                account[0].save({fields: ['amount']}).then(function() {
+                    res.redirect('/account-details?accountId=' + req.body.account_type);
+                });
+            });
         });
 });
 

@@ -36,7 +36,9 @@ router.get('/account-details', function(req, res) {
         account: null,
         budgets: null,
         transactions: null,
-        transactionTypes: null
+        transactionTypes: null,
+        monthtlyExpenses: null,
+        monthly: null,
     }
 
     models.Account.all().then(function(accounts) {
@@ -59,12 +61,8 @@ router.get('/account-details', function(req, res) {
                 }).then(function(account) {
                     accountDetailsResponse.account = account;
                     accountDetailsResponse.transactions = account[0].Transactions;
-
-                    getMonthlyExpenses(accountDetailsResponse.transactions).then(function(monthlyExpenses) {
-                        console.log("******* Monthly expenses: " + monthlyExpenses);
-                    });
-
-
+                    accountDetailsResponse.monthlyExpenses = getMonthlyExpenses(accountDetailsResponse.transactions);
+                    accountDetailsResponse.monthlyIncome = getMonthlyIncome(accountDetailsResponse.transactions);
                     decorateTransactionList(accountDetailsResponse.transactions).then(function(decoratedTransactions) {
                         accountDetailsResponse.transactions = decoratedTransactions;
                         res.render('account_details', {accountDetailsResponse: accountDetailsResponse});
@@ -89,16 +87,30 @@ function decorateTransactionList(transactions) {
 
 function getMonthlyExpenses(transactions) {
     var expenses = 0;
-    return Promise.map(transactions, function(transaction) {
-        var transactionMonth = new Date(transaction.date).getMonth();
+    for(i=0; i<transactions.length; i++) {
+        var transactionMonth = new Date(transactions[i].date).getMonth();
         console.log("=======> Tx month " + transactionMonth );
         var currentMonth = new Date().getMonth();
         console.log("=======> Current month " + currentMonth );
-        if(transactionMonth === currentMonth && parseInt(transaction.TransactionTypeId) === parseInt(2)) {
-            expenses = expenses + transaction.amount;
+        if(transactionMonth === currentMonth && parseInt(transactions[i].TransactionTypeId) === parseInt(2)) {
+            expenses = expenses + transactions[i].amount;
         }
-        return expenses;
-    });
+    }
+    return expenses;
+}
+
+function getMonthlyIncome(transactions) {
+    var income = 0;
+    for(i=0; i<transactions.length; i++) {
+      var transactionMonth = new Date(transactions[i].date).getMonth();
+      console.log("=======> Tx month " + transactionMonth );
+      var currentMonth = new Date().getMonth();
+      console.log("=======> Current month " + currentMonth );
+      if(transactionMonth === currentMonth && parseInt(transactions[i].TransactionTypeId) === parseInt(12)) {
+        income = income + transactions[i].amount;
+      }
+    }
+    return income;
 }
 
 router.post('/insert-transaction', function(req, res) {

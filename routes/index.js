@@ -59,6 +59,12 @@ router.get('/account-details', function(req, res) {
                 }).then(function(account) {
                     accountDetailsResponse.account = account;
                     accountDetailsResponse.transactions = account[0].Transactions;
+
+                    getMonthlyExpenses(accountDetailsResponse.transactions).then(function(monthlyExpenses) {
+                        console.log("******* Monthly expenses: " + monthlyExpenses);
+                    });
+
+
                     decorateTransactionList(accountDetailsResponse.transactions).then(function(decoratedTransactions) {
                         accountDetailsResponse.transactions = decoratedTransactions;
                         res.render('account_details', {accountDetailsResponse: accountDetailsResponse});
@@ -81,6 +87,20 @@ function decorateTransactionList(transactions) {
     });
 }
 
+function getMonthlyExpenses(transactions) {
+    var expenses = 0;
+    return Promise.map(transactions, function(transaction) {
+        var transactionMonth = new Date(transaction.date).getMonth();
+        console.log("=======> Tx month " + transactionMonth );
+        var currentMonth = new Date().getMonth();
+        console.log("=======> Current month " + currentMonth );
+        if(transactionMonth === currentMonth && parseInt(transaction.TransactionTypeId) === parseInt(2)) {
+            expenses = expenses + transaction.amount;
+        }
+        return expenses;
+    });
+}
+
 router.post('/insert-transaction', function(req, res) {
     models.Transaction
         .build({
@@ -97,7 +117,11 @@ router.post('/insert-transaction', function(req, res) {
                 id: req.body.account_type
               }
             }).then(function(account) {
-                account[0].amount = account[0].amount - parseInt(req.body.amount);
+                if(parseInt(req.body.transaction_type) === parseInt(2)) {
+                    account[0].amount = account[0].amount - parseInt(req.body.amount);
+                } else {
+                    account[0].amount = account[0].amount + parseInt(req.body.amount);
+                }
                 account[0].save({fields: ['amount']}).then(function() {
                     res.redirect('/account-details?accountId=' + req.body.account_type);
                 });

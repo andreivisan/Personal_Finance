@@ -148,7 +148,7 @@
         <div class="ibox float-e-margins">
             <div class="ibox-title">
                 <span class="label label-success pull-right">Monthly</span>
-                <h5>Income</h5>
+                <h5>BUDGET BALANCE</h5>
             </div>
             <div class="ibox-content">
                 <h1 class="no-margins"> EUR</h1>
@@ -160,7 +160,7 @@
         <div class="ibox float-e-margins">
             <div class="ibox-title">
                 <span class="label label-info pull-right">Total</span>
-                <h5>Available</h5>
+                <h5>BUDGET LIMIT</h5>
             </div>
             <div class="ibox-content">
                 <h1 class="no-margins"> EUR</h1>
@@ -172,7 +172,7 @@
         <div class="ibox float-e-margins">
             <div class="ibox-title">
                 <span class="label label-danger pull-right">Current Month</span>
-                <h5>Expenses</h5>
+                <h5>EXPENSES</h5>
             </div>
             <div class="ibox-content">
                 <h1 class="no-margins"> EUR</h1>
@@ -180,6 +180,29 @@
         </div>
     </div>
 
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <h5>BUDGETS</h5>
+
+                    <% budgetsMainResponse.budgets.forEach(function(budget) { %>
+                        <%= budget.name %>
+                        <div class="UIProgressBar">
+                            <div class="progress progress-background-color">
+                                <div style="width: 35%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="35" role="progressbar" class="progress-bar progress-bar-success progress-success-background-color">
+
+                                </div>
+                            </div>
+                        </div>
+                    <% }) %>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="wrapper wrapper-content animated fadeInRight">

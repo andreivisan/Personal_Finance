@@ -37,9 +37,9 @@ router.get('/account-details', function(req, res) {
         budgets: null,
         transactions: null,
         transactionTypes: null,
-        monthtlyExpenses: null,
-        monthly: null,
-    }
+        monthlyExpenses: null,
+        monthlyIncome: null
+    };
 
     models.Account.all().then(function(accounts) {
         accountDetailsResponse.accounts = accounts;
@@ -73,13 +73,48 @@ router.get('/account-details', function(req, res) {
     });
 });
 
+router.get('/budgets-main', function(req, res) {
+    var budgetsMainResponse = {
+        accounts: null,
+        budgets: null,
+        transactions: null,
+        transactionTypes: null
+    };
+
+    models.Account.all().then(function(accounts) {
+        budgetsMainResponse.accounts = accounts;
+        return budgetsMainResponse;
+    }).then(function(budgetsMainResponse) {
+        models.Budget.all().then(function(budgets) {
+            budgetsMainResponse.budgets = budgets;
+            return budgetsMainResponse;
+        }).then(function(budgetsMainResponse) {
+            models.TransactionType.all().then(function(transactionTypes){
+                budgetsMainResponse.transactionTypes = transactionTypes;
+                return budgetsMainResponse;
+            }).then(function(budgetsMainResponse){
+                models.Transaction.all().then(function(transactions) {
+                    budgetsMainResponse.transactions = transactions;
+                    decorateTransactionList(budgetsMainResponse.transactions).then(function(decoratedTransactions) {
+                        budgetsMainResponse.transactions = decoratedTransactions;
+                        res.render('budgets_main', {budgetsMainResponse: budgetsMainResponse});
+                    });
+                });
+            });
+        });
+    });
+});
+
 function decorateTransactionList(transactions) {
     return Promise.map(transactions, function(transaction) {
         return transaction.getBudget().then(function(budget) {
             transaction.BudgetId = budget.name;
             return transaction.getTransactionType().then(function(transactionType) {
                 transaction.TransactionTypeId = transactionType.type;
-                return transaction;
+                return transaction.getAccount().then(function(account) {
+                    transaction.AccountId = account.name;
+                    return transaction;
+                });
             });
         });
     });
@@ -87,7 +122,7 @@ function decorateTransactionList(transactions) {
 
 function getMonthlyExpenses(transactions) {
     var expenses = 0;
-    for(i=0; i<transactions.length; i++) {
+    for(var i=0; i<transactions.length; i++) {
         var transactionMonth = new Date(transactions[i].date).getMonth();
         var currentMonth = new Date().getMonth();
         if(transactionMonth === currentMonth && parseInt(transactions[i].TransactionTypeId) === parseInt(2)) {
@@ -99,7 +134,7 @@ function getMonthlyExpenses(transactions) {
 
 function getMonthlyIncome(transactions) {
     var income = 0;
-    for(i=0; i<transactions.length; i++) {
+    for(var i=0; i<transactions.length; i++) {
         var transactionMonth = new Date(transactions[i].date).getMonth();
         var currentMonth = new Date().getMonth();
         if(transactionMonth === currentMonth && parseInt(transactions[i].TransactionTypeId) === parseInt(12)) {

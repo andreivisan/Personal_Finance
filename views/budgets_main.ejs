@@ -45,11 +45,11 @@
             <li class="side-menu-height">
                 <a href="/main-dashboard"><i class="fa fa-desktop"></i> <span class="nav-label">DASHBOARD</span> <span class="fa"></span></a>
             </li>
-            <li class="active side-menu-height">
+            <li class="side-menu-height">
                 <a href="layouts.html"><i class="fa fa-bank"></i> <span class="nav-label">ACCOUNTS</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <% if(accountDetailsResponse.accounts) { %>
-                        <% accountDetailsResponse.accounts.forEach(function(account) { %>
+                    <% if(budgetsMainResponse.accounts) { %>
+                        <% budgetsMainResponse.accounts.forEach(function(account) { %>
                             <li><a href="/account-details?accountId=<%= account.id %>"><%= account.name %></a></li>
                         <% }) %>
                     <% } %>
@@ -101,7 +101,7 @@
                     <li><a href="graph_morris.html">Savings</a></li>
                 </ul>
             </li>
-            <li class="side-menu-height">
+            <li class="active side-menu-height">
                 <a href="/budgets-main"><i class="fa fa-calculator"></i> <span class="nav-label">BUDGET PLANNING </span></a>
             </li>
         </ul>
@@ -110,82 +110,82 @@
 </nav>
 
 <div id="page-wrapper" class="gray-bg">
-  <div class="row border-bottom">
+<div class="row border-bottom">
     <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-      <div class="navbar-header">
-        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-        <form role="search" class="navbar-form-custom" action="search_results.html">
-          <div class="form-group">
-            <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
-          </div>
-        </form>
-      </div>
-      <ul class="nav navbar-top-links navbar-right">
-        <li>
-          <span class="m-r-sm text-muted welcome-message">Welcome to INSPINIA+ Admin Theme.</span>
-        </li>
+        <div class="navbar-header">
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+            <form role="search" class="navbar-form-custom" action="search_results.html">
+                <div class="form-group">
+                    <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
+                </div>
+            </form>
+        </div>
+        <ul class="nav navbar-top-links navbar-right">
+            <li>
+                <span class="m-r-sm text-muted welcome-message">Welcome to INSPINIA+ Admin Theme.</span>
+            </li>
 
-        <li>
-          <a href="login.html">
-            <i class="fa fa-sign-out"></i> Log out
-          </a>
-        </li>
-      </ul>
+            <li>
+                <a href="login.html">
+                    <i class="fa fa-sign-out"></i> Log out
+                </a>
+            </li>
+        </ul>
 
     </nav>
-  </div>
+</div>
 
-  <div class="wrapper-content">
-      <% if(accountDetailsResponse.account) { %>
+<div class="wrapper-content">
 
-          <div class="row wrapper border-bottom white-bg page-heading">
-              <div class="col-lg-9">
-                  <h2><%= accountDetailsResponse.account[0].name %></h2>
-              </div>
-          </div>
 
-          <div class="col-md-2 account-details-ibox-width">
-            <div class="ibox float-e-margins">
-              <div class="ibox-title">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-9">
+            <h2><i class="fa fa-calculator"></i> BUDGETS</h2>
+        </div>
+    </div>
+
+    <div class="col-md-2 account-details-ibox-width">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
                 <span class="label label-success pull-right">Monthly</span>
                 <h5>Income</h5>
-              </div>
-              <div class="ibox-content">
-                <h1 class="no-margins"><%= accountDetailsResponse.monthlyIncome %> EUR</h1>
-              </div>
             </div>
-          </div>
+            <div class="ibox-content">
+                <h1 class="no-margins"> EUR</h1>
+            </div>
+        </div>
+    </div>
 
-          <div class="col-md-2 account-details-ibox-width">
-            <div class="ibox float-e-margins">
-              <div class="ibox-title">
+    <div class="col-md-2 account-details-ibox-width">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
                 <span class="label label-info pull-right">Total</span>
                 <h5>Available</h5>
-              </div>
-              <div class="ibox-content">
-                <h1 class="no-margins"><%= accountDetailsResponse.account[0].amount%> <%= accountDetailsResponse.account[0].currency %></h1>
-              </div>
             </div>
-          </div>
+            <div class="ibox-content">
+                <h1 class="no-margins"> EUR</h1>
+            </div>
+        </div>
+    </div>
 
-          <div class="col-md-2 account-details-ibox-width">
-              <div class="ibox float-e-margins">
-                  <div class="ibox-title">
-                      <span class="label label-danger pull-right">Current Month</span>
-                      <h5>Expenses</h5>
-                  </div>
-                  <div class="ibox-content">
-                      <h1 class="no-margins"><%= accountDetailsResponse.monthlyExpenses %> EUR</h1>
-                  </div>
-              </div>
-          </div>
-      <% } %>
-  </div>
+    <div class="col-md-2 account-details-ibox-width">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <span class="label label-danger pull-right">Current Month</span>
+                <h5>Expenses</h5>
+            </div>
+            <div class="ibox-content">
+                <h1 class="no-margins"> EUR</h1>
+            </div>
+        </div>
+    </div>
 
-  <div class="wrapper wrapper-content animated fadeInRight">
+</div>
 
-      <div class="row">
-         <div class="col-lg-12">
+<div class="wrapper wrapper-content animated fadeInRight">
+
+    <div class="row">
+        <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>TRANSACTIONS</h5>
@@ -198,10 +198,10 @@
                         </a>
 
                         <ul class="dropdown-menu dropdown-user">
-                          <li><a href="#">Config option 1</a>
-                          </li>
-                          <li><a href="#">Config option 2</a>
-                          </li>
+                            <li><a href="#">Config option 1</a>
+                            </li>
+                            <li><a href="#">Config option 2</a>
+                            </li>
                         </ul>
                         <a class="close-link">
                             <i class="fa fa-times"></i>
@@ -233,21 +233,21 @@
                                                         </div>
                                                         <div class="form-group"><label>TYPE</label>
                                                             <select name="transaction_type" class="form-control m-b">
-                                                                <% accountDetailsResponse.transactionTypes.forEach( function(transactionType) {  %>
+                                                                <% budgetsMainResponse.transactionTypes.forEach( function(transactionType) {  %>
                                                                 <option value="<%= transactionType.id %>"><%= transactionType.type %></option>
                                                                 <% }) %>
                                                             </select>
                                                         </div>
                                                         <div class="form-group"><label>ACCOUNT</label>
                                                             <select name="account_type" class="form-control m-b">
-                                                                <% accountDetailsResponse.accounts.forEach(function(account) { %>
+                                                                <% budgetsMainResponse.accounts.forEach(function(account) { %>
                                                                 <option value="<%= account.id %>"><%= account.name %></option>
                                                                 <% }) %>
                                                             </select>
                                                         </div>
                                                         <div class="form-group"><label>BUDGET</label>
                                                             <select name="budget" class="form-control m-b">
-                                                                <% accountDetailsResponse.budgets.forEach(function(budget) { %>
+                                                                <% budgetsMainResponse.budgets.forEach(function(budget) { %>
                                                                 <option value="<%= budget.id %>"><%= budget.name %></option>
                                                                 <% }) %>
                                                             </select>
@@ -267,63 +267,63 @@
 
                     <table class="table table-striped table-bordered table-hover dataTables-example" >
                         <thead>
-                          <tr>
-                              <th>#</th>
-                              <th>DATE </th>
-                              <th>AMOUNT </th>
-                              <th>DESCRIPTION </th>
-                              <th>TYPE </th>
-                              <th>ACCOUNT </th>
-                              <th>BUDGET</th>
-                          </tr>
+                        <tr>
+                            <th>#</th>
+                            <th>DATE </th>
+                            <th>AMOUNT </th>
+                            <th>DESCRIPTION </th>
+                            <th>TYPE </th>
+                            <th>ACCOUNT </th>
+                            <th>BUDGET</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            <% if(accountDetailsResponse.transactions) { %>
-                                <% accountDetailsResponse.transactions.forEach(function(transaction) { %>
-                                    <tr class="gradeX">
-                                        <td>
-                                            <a href="/delete-transaction?transactionId=<%= transaction.id%>&accountId=<%= accountDetailsResponse.account[0].id%>">
-                                                <i class="fa fa-trash"></i>
-                                            </a>
-                                        </td>
-                                        <td><%= transaction.date %></td>
-                                        <td><%= transaction.amount %></td>
-                                        <td><%= transaction.description %></td>
-                                        <td><%= transaction.TransactionTypeId %></td>
-                                        <td><%= accountDetailsResponse.account[0].name %></td>
-                                        <td><%= transaction.BudgetId %></td>
-                                    </tr>
-                                <% }) %>
-                            <% } %>
+                        <% if(budgetsMainResponse.transactions) { %>
+                            <% budgetsMainResponse.transactions.forEach(function(transaction) { %>
+                                <tr class="gradeX">
+                                    <td>
+                                        <a href="/delete-transaction?transactionId=<%= transaction.id %>">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </td>
+                                    <td><%= transaction.date %></td>
+                                    <td><%= transaction.amount %></td>
+                                    <td><%= transaction.description %></td>
+                                    <td><%= transaction.TransactionTypeId %></td>
+                                    <td><%= transaction.AccountId %></td>
+                                    <td><%= transaction.BudgetId %></td>
+                                </tr>
+                            <% }) %>
+                        <% } %>
                         </tbody>
                         <tfoot>
-                          <tr>
-                              <th>#</th>
-                              <th>DATE </th>
-                              <th>AMOUNT </th>
-                              <th>DESCRIPTION </th>
-                              <th>TYPE </th>
-                              <th>ACCOUNT </th>
-                              <th>BUDGET</th>
-                          </tr>
+                        <tr>
+                            <th>#</th>
+                            <th>DATE </th>
+                            <th>AMOUNT </th>
+                            <th>DESCRIPTION </th>
+                            <th>TYPE </th>
+                            <th>ACCOUNT </th>
+                            <th>BUDGET</th>
+                        </tr>
                         </tfoot>
                     </table>
 
                 </div>
             </div>
-         </div>
-      </div>
+        </div>
+    </div>
 
-  </div>
+</div>
 
-  <div class="footer">
+<div class="footer">
     <div class="pull-right">
-      10GB of <strong>250GB</strong> Free.
+        10GB of <strong>250GB</strong> Free.
     </div>
     <div>
-      <strong>Copyright</strong> Example Company &copy; 2014-2015
+        <strong>Copyright</strong> Example Company &copy; 2014-2015
     </div>
-  </div>
+</div>
 
 </div>
 </div>

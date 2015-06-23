@@ -89,9 +89,7 @@ function getMonthlyExpenses(transactions) {
     var expenses = 0;
     for(i=0; i<transactions.length; i++) {
         var transactionMonth = new Date(transactions[i].date).getMonth();
-        console.log("=======> Tx month " + transactionMonth );
         var currentMonth = new Date().getMonth();
-        console.log("=======> Current month " + currentMonth );
         if(transactionMonth === currentMonth && parseInt(transactions[i].TransactionTypeId) === parseInt(2)) {
             expenses = expenses + transactions[i].amount;
         }
@@ -102,13 +100,11 @@ function getMonthlyExpenses(transactions) {
 function getMonthlyIncome(transactions) {
     var income = 0;
     for(i=0; i<transactions.length; i++) {
-      var transactionMonth = new Date(transactions[i].date).getMonth();
-      console.log("=======> Tx month " + transactionMonth );
-      var currentMonth = new Date().getMonth();
-      console.log("=======> Current month " + currentMonth );
-      if(transactionMonth === currentMonth && parseInt(transactions[i].TransactionTypeId) === parseInt(12)) {
-        income = income + transactions[i].amount;
-      }
+        var transactionMonth = new Date(transactions[i].date).getMonth();
+        var currentMonth = new Date().getMonth();
+        if(transactionMonth === currentMonth && parseInt(transactions[i].TransactionTypeId) === parseInt(12)) {
+            income = income + transactions[i].amount;
+        }
     }
     return income;
 }
@@ -142,14 +138,33 @@ router.post('/insert-transaction', function(req, res) {
 });
 
 router.get('/delete-transaction', function(req, res) {
-    models.Transaction
-        .destroy({
-            where: {
-              id: req.param("transactionId")
-            }
-        }).then(function() {
-            res.redirect('/account-details?accountId=' + req.param("accountId"));
-        });
+    var transactionAmount;
+    var transactionType;
+
+    models.Transaction.findAll({
+        where: {
+            id: req.param("transactionId")
+        }
+    }).then(function(transaction) {
+        transactionAmount = transaction[0].amount;
+        transactionType = transaction[0].TransactionTypeId;
+        transaction[0].destroy().then(function() {
+            models.Account.findAll({
+                where: {
+                    id: req.param("accountId")
+                  }
+                }).then(function(account) {
+                    if(parseInt(transactionType) === parseInt(2)) {
+                      account[0].amount = account[0].amount + parseInt(transactionAmount);
+                    } else {
+                      account[0].amount = account[0].amount - parseInt(transactionAmount);
+                    }
+                    account[0].save({fields: ['amount']}).then(function() {
+                    res.redirect('/account-details?accountId=' + req.param("accountId"));
+                });
+            });
+        })
+    });
 });
 
 module.exports = router;

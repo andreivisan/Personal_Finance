@@ -162,6 +162,7 @@ function decorateBudgets(budgets) {
         }).then(function(transactions) {
             decoratedBudget.budget = budget;
             decoratedBudget.amountSpent = calculateTransactionsTotalAmount(transactions);
+            decoratedBudget.balancePercentage = (decoratedBudget.amountSpent/decoratedBudget.budget.limit) * 100;
             return decoratedBudget;
         });
     });

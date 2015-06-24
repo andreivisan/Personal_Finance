@@ -97,7 +97,10 @@ router.get('/budgets-main', function(req, res) {
                     budgetsMainResponse.transactions = transactions;
                     decorateTransactionList(budgetsMainResponse.transactions).then(function(decoratedTransactions) {
                         budgetsMainResponse.transactions = decoratedTransactions;
-                        res.render('budgets_main', {budgetsMainResponse: budgetsMainResponse});
+                        decorateBudgets(budgetsMainResponse.budgets).then(function(decoratedBudgets) {
+                            budgetsMainResponse.budgets = decoratedBudgets;
+                            res.render('budgets_main', {budgetsMainResponse: budgetsMainResponse});
+                        });
                     });
                 });
             });
@@ -142,6 +145,34 @@ function getMonthlyIncome(transactions) {
         }
     }
     return income;
+}
+
+function decorateBudgets(budgets) {
+    return Promise.map(budgets, function(budget) {
+        var decoratedBudget = {
+          budget: null,
+          amountSpent: null,
+          balancePercentage: null
+        }
+        decoratedBudget.budget = budget
+        return models.Transaction.findAll({
+          where: {
+            BudgetId: decoratedBudget.budget.id
+          }
+        }).then(function(transactions) {
+            decoratedBudget.budget = budget;
+            decoratedBudget.amountSpent = calculateTransactionsTotalAmount(transactions);
+            return decoratedBudget;
+        });
+    });
+}
+
+function calculateTransactionsTotalAmount(transactions) {
+    var totalAmountSpent = 0;
+    for(var i=0; i<transactions.length; i++) {
+        totalAmountSpent = totalAmountSpent + transactions[i].amount;
+    }
+    return totalAmountSpent;
 }
 
 router.post('/insert-transaction', function(req, res) {

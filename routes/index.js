@@ -171,7 +171,9 @@ function decorateBudgets(budgets) {
 function calculateTransactionsTotalAmount(transactions) {
     var totalAmountSpent = 0;
     for(var i=0; i<transactions.length; i++) {
-        totalAmountSpent = totalAmountSpent + transactions[i].amount;
+        if(parseInt(transactions[i].TransactionTypeId) === parseInt(2)) {
+            totalAmountSpent = totalAmountSpent + transactions[i].amount;
+        }
     }
     return totalAmountSpent;
 }

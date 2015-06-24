@@ -411,6 +411,11 @@
 
     $(document).ready(function() {
 
+        $('.progress-bar').each(function(i, div) {
+            debugger;
+            console.log("=======> " + div);
+        });
+
         $('.dataTables-example').dataTable({
             responsive: true
         });

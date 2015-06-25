@@ -183,7 +183,7 @@ router.post('/insert-transaction', function(req, res) {
         .build({
             description: req.body.description,
             amount: parseInt(req.body.amount),
-            BudgetId: parseInt(req.body.budget) === 0 ? null : parseInt(req.body.budget),
+            BudgetId: parseInt(req.body.budget),
             date: new Date(req.body.date).toISOString().slice(0, 19).replace('T', ' '),
             AccountId: parseInt(req.body.account_type),
             TransactionTypeId: parseInt(req.body.transaction_type)})

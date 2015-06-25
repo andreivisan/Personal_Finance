@@ -7,7 +7,7 @@ var sequelize = new Sequelize('heroku_e56800c88b7a6b4', process.env.MYSQL_USER, 
     host: process.env.MYSQL_URL,
     dialect: 'mysql',
     pool: {
-        max: 100,
+        max: 9,
         min: 0,
         idle: 10000
     }

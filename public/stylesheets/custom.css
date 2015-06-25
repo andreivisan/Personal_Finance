@@ -45,3 +45,49 @@
     margin-bottom: 2px;
     border-radius: 5px;
 }
+
+.budgetName {
+    overflow: hidden;
+    position: absolute;
+    text-align: right;
+    white-space: nowrap;
+    left: -170px;
+    width: 150px;
+    top:25px;
+}
+
+.budgetContainer {
+    position: relative;
+}
+
+.budgetListContainer {
+    margin-left: 150px;
+    padding-bottom: 20px;
+    position: relative;
+}
+
+.lF {
+    float: left;
+}
+
+.spentAmount {
+    padding-top: 5px;
+    position: relative;
+    color: #989898;
+}
+
+.progressBarContainer {
+    margin-top: 3px;
+    position: relative;
+}
+
+.cF {
+    clear: both;
+    font-size: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+.rF {
+    float: right;
+}

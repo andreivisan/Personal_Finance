@@ -74,6 +74,9 @@ router.get('/account-details', function(req, res) {
 });
 
 router.get('/budgets-main', function(req, res) {
+
+    console.log("=========>")
+
     var budgetsMainResponse = {
         accounts: null,
         budgets: null,

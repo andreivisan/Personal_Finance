@@ -26,18 +26,18 @@
       <file leaf-file-name="account_details.ejs" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/account_details.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-34.375" vertical-offset="735" max-vertical-offset="7335">
+            <state vertical-scroll-proportion="65.0" vertical-offset="3120" max-vertical-offset="7335">
               <caret line="104" column="33" selection-start-line="104" selection-start-column="26" selection-end-line="104" selection-end-column="33" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="budgets_main.ejs" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="budgets_main.ejs" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/budgets_main.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-31.875" vertical-offset="1890" max-vertical-offset="8115">
-              <caret line="177" column="77" selection-start-line="177" selection-start-column="77" selection-end-line="177" selection-end-column="77" />
+            <state vertical-scroll-proportion="0.15393387" vertical-offset="2160" max-vertical-offset="8115">
+              <caret line="153" column="119" selection-start-line="153" selection-start-column="119" selection-end-line="153" selection-end-column="119" />
               <folding>
                 <element signature="n#style#0;n#nav#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -56,11 +56,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="index.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.47483587" vertical-offset="1036" max-vertical-offset="3810">
-              <caret line="98" column="123" selection-start-line="98" selection-start-column="123" selection-end-line="98" selection-end-column="123" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2446" max-vertical-offset="3915">
+              <caret line="191" column="68" selection-start-line="191" selection-start-column="68" selection-end-line="191" selection-end-column="68" />
               <folding />
             </state>
           </provider>
@@ -129,8 +129,8 @@
         <option value="$PROJECT_DIR$/views/account_details.ejs" />
         <option value="$PROJECT_DIR$/models/index.js" />
         <option value="$PROJECT_DIR$/public/stylesheets/custom.css" />
-        <option value="$PROJECT_DIR$/views/budgets_main.ejs" />
         <option value="$PROJECT_DIR$/routes/index.js" />
+        <option value="$PROJECT_DIR$/views/budgets_main.ejs" />
       </list>
     </option>
   </component>
@@ -547,12 +547,12 @@
       <workItem from="1434893070147" duration="10571000" />
       <workItem from="1435084605799" duration="3774000" />
       <workItem from="1435090183077" duration="1050000" />
-      <workItem from="1435247082272" duration="7702000" />
+      <workItem from="1435247082272" duration="8105000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39426000" />
+    <option name="totallyTimeSpent" value="39829000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1440" y="-75" width="1264" height="1057" extended-state="6" />
@@ -979,14 +979,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/account_details.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-34.375" vertical-offset="735" max-vertical-offset="7335">
-          <caret line="104" column="33" selection-start-line="104" selection-start-column="26" selection-end-line="104" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/stylesheets/custom.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="856" max-vertical-offset="1770">
@@ -995,22 +987,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/budgets_main.ejs">
+    <entry file="file://$PROJECT_DIR$/views/account_details.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-31.875" vertical-offset="1890" max-vertical-offset="8115">
-          <caret line="177" column="77" selection-start-line="177" selection-start-column="77" selection-end-line="177" selection-end-column="77" />
-          <folding>
-            <element signature="n#style#0;n#nav#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="65.0" vertical-offset="3120" max-vertical-offset="7335">
+          <caret line="104" column="33" selection-start-line="104" selection-start-column="26" selection-end-line="104" selection-end-column="33" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.47483587" vertical-offset="1036" max-vertical-offset="3810">
-          <caret line="98" column="123" selection-start-line="98" selection-start-column="123" selection-end-line="98" selection-end-column="123" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="2446" max-vertical-offset="3915">
+          <caret line="191" column="68" selection-start-line="191" selection-start-column="68" selection-end-line="191" selection-end-column="68" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/budgets_main.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.15393387" vertical-offset="2160" max-vertical-offset="8115">
+          <caret line="153" column="119" selection-start-line="153" selection-start-column="119" selection-end-line="153" selection-end-column="119" />
+          <folding>
+            <element signature="n#style#0;n#nav#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

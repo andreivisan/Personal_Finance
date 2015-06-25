@@ -79,7 +79,8 @@ router.get('/budgets-main', function(req, res) {
         budgets: null,
         transactions: null,
         transactionTypes: null,
-        totalExpenses: null
+        totalExpenses: null,
+        totalBudgetsBalance: null
     };
 
     models.Account.all().then(function(accounts) {
@@ -88,6 +89,7 @@ router.get('/budgets-main', function(req, res) {
     }).then(function(budgetsMainResponse) {
         models.Budget.all().then(function(budgets) {
             budgetsMainResponse.budgets = budgets;
+            budgetsMainResponse.totalBudgetsBalance = calculateBudgetsTotalBalance(budgetsMainResponse.budgets);
             return budgetsMainResponse;
         }).then(function(budgetsMainResponse) {
             models.TransactionType.all().then(function(transactionTypes){
@@ -175,9 +177,6 @@ function decorateBudgets(budgets) {
 }
 
 function calculateTransactionsTotalAmount(transactions) {
-
-    console.log("======> " + transactions.length);
-
     var totalAmountSpent = 0;
     for(var i=0; i<transactions.length; i++) {
         if(parseInt(transactions[i].TransactionTypeId) === parseInt(2)) {
@@ -185,6 +184,14 @@ function calculateTransactionsTotalAmount(transactions) {
         }
     }
     return totalAmountSpent;
+}
+
+function calculateBudgetsTotalBalance(budgets) {
+    var totalBudgetsBalance = 0;
+    for(var i=0; i<budgets.length; i++) {
+        totalBudgetsBalance = totalBudgetsBalance + budgets[i].limit;
+    }
+    return totalBudgetsBalance;
 }
 
 router.post('/insert-transaction', function(req, res) {

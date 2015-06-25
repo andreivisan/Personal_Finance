@@ -175,7 +175,7 @@
                 <h5>EXPENSES</h5>
             </div>
             <div class="ibox-content">
-                <h1 class="no-margins"> EUR</h1>
+                <h1 class="no-margins"><%= budgetsMainResponse.totalExpenses %> EUR</h1>
             </div>
         </div>
     </div>
@@ -201,7 +201,7 @@
                                     </div>
 
                                     <div class="rF">
-                                        <div class="spentAmount"><%= budget.budget.limit - budget.amountSpent %> LEFT</div>
+                                        <div class="leftAmount"><%= budget.budget.limit - budget.amountSpent %> LEFT</div>
                                     </div>
 
                                     <div class="cF"> </div>

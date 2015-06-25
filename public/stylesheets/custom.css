@@ -99,3 +99,15 @@
 .rF {
     float: right;
 }
+
+.spentAmountOrange {
+    color: #fdb77b !important;
+}
+
+.spentAmountRed {
+    color: #e64b30 !important;
+}
+
+.spentAmountGreen {
+    color: #2bd96e !important;
+}

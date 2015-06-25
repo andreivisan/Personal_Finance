@@ -74,14 +74,12 @@ router.get('/account-details', function(req, res) {
 });
 
 router.get('/budgets-main', function(req, res) {
-
-    console.log("=========>")
-
     var budgetsMainResponse = {
         accounts: null,
         budgets: null,
         transactions: null,
-        transactionTypes: null
+        transactionTypes: null,
+        totalExpenses: null
     };
 
     models.Account.all().then(function(accounts) {
@@ -98,6 +96,7 @@ router.get('/budgets-main', function(req, res) {
             }).then(function(budgetsMainResponse){
                 models.Transaction.all().then(function(transactions) {
                     budgetsMainResponse.transactions = transactions;
+                    budgetsMainResponse.totalExpenses = calculateTransactionsTotalAmount(budgetsMainResponse.transactions);
                     decorateTransactionList(budgetsMainResponse.transactions).then(function(decoratedTransactions) {
                         budgetsMainResponse.transactions = decoratedTransactions;
                         decorateBudgets(budgetsMainResponse.budgets).then(function(decoratedBudgets) {
@@ -176,6 +175,9 @@ function decorateBudgets(budgets) {
 }
 
 function calculateTransactionsTotalAmount(transactions) {
+
+    console.log("======> " + transactions.length);
+
     var totalAmountSpent = 0;
     for(var i=0; i<transactions.length; i++) {
         if(parseInt(transactions[i].TransactionTypeId) === parseInt(2)) {

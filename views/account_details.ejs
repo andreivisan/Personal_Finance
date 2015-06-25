@@ -247,6 +247,7 @@
                                                         </div>
                                                         <div class="form-group"><label>BUDGET</label>
                                                             <select name="budget" class="form-control m-b">
+                                                                <option value="0">None</option>
                                                                 <% accountDetailsResponse.budgets.forEach(function(budget) { %>
                                                                 <option value="<%= budget.id %>"><%= budget.name %></option>
                                                                 <% }) %>

@@ -38,6 +38,14 @@
     background-color: #dcdce2 !important;
 }
 
+.progress-background-color-red {
+    background-color: #e64b30 !important;
+}
+
+.progress-background-color-orange {
+    background-color: #fdb77b !important;
+}
+
 .UIProgressBar {
     border: 1px solid #dcdce2;
     padding: 2px;

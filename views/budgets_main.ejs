@@ -431,8 +431,14 @@
     $(document).ready(function() {
 
         $('.progress-bar').each(function(i, div) {
-
-            console.log("=======> " + div);
+            var amountSpentPercentage = parseInt($(this).attr("style").match(/\d+/)[0]);
+            if(amountSpentPercentage && amountSpentPercentage > 100) {
+                amountSpentPercentage = parseInt(200) - amountSpentPercentage;
+                $(this).parent().addClass("progress-background-color-red").siblings().removeClass("progress-background-color");
+                $(this).css('width', amountSpentPercentage +'%');
+            } else if(amountSpentPercentage && amountSpentPercentage > 75) {
+                $(this).parent().addClass("progress-background-color-orange").siblings().removeClass("progress-background-color");
+            }
         });
 
         $('.dataTables-example').dataTable({
